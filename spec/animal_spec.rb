@@ -1,4 +1,4 @@
-require 'rspec'
+
 require './lib/animal'
 
 RSpec.describe Animal do
@@ -30,5 +30,12 @@ RSpec.describe Animal do
     animal = Animal.new("Sea Otter", 10, 25)
 
     expect(animal.age_in_days).to eq(175)
+  end
+
+  it 'can add weight in pounds' do
+    animal = Animal.new("Sea Otter", 10, 25)
+
+    expect(animal.feed(2)).to eq("12 pounds")
+    expect(animal.feed(1)).to eq("13 pounds")
   end
 end
