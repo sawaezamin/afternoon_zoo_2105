@@ -15,5 +15,10 @@ class Zoo
   def add_animal(animal)
     @animal.push(animal)
   end
-  
+
+  def animals_older_than
+    @animals.map do |age|
+      age >= 10
+    end
+  end
 end
