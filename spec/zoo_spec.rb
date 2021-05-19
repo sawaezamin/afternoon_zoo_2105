@@ -7,7 +7,8 @@ RSpec.describe Zoo do
       zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY")
       animal_1 = Animal.new("Sea Otter", 10, 25)
       animal_2 = Animal.new("Red Panda", 5, 70)
-
+      animal_3 = Animal.new("Capybara", 100, 200)
+      animal_4 = Animal.new("Dolphin", 150, 200)
       expect(zoo).to be_an_instance_of(Zoo)
     end
 
@@ -15,6 +16,8 @@ RSpec.describe Zoo do
       zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY")
       animal_1 = Animal.new("Sea Otter", 10, 25)
       animal_2 = Animal.new("Red Panda", 5, 70)
+      animal_3 = Animal.new("Capybara", 100, 200)
+      animal_4 = Animal.new("Dolphin", 150, 200)
 
       expect(zoo.street).to eq("2300 Southern Blvd")
       expect(zoo.city).to eq("Bronx")
@@ -27,6 +30,8 @@ RSpec.describe Zoo do
       zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY")
       animal_1 = Animal.new("Sea Otter", 10, 25)
       animal_2 = Animal.new("Red Panda", 5, 70)
+      animal_3 = Animal.new("Capybara", 100, 200)
+      animal_4 = Animal.new("Dolphin", 150, 200)
 
       expect(zoo.inventory).to eq([])
       expect(zoo.animal_count). to eq(0)
@@ -36,12 +41,48 @@ RSpec.describe Zoo do
       zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY")
       animal_1 = Animal.new("Sea Otter", 10, 25)
       animal_2 = Animal.new("Red Panda", 5, 70)
+      animal_3 = Animal.new("Capybara", 100, 200)
+      animal_4 = Animal.new("Dolphin", 150, 200)
 
       zoo.add_animal(animal_1)
       zoo.add_animal(animal_2)
+      zoo.add_animal(animal_3)
+      zoo.add_animal(animal_4)
 
-      expect(zoo.inventory).to eq([animal_1, animal_2])
-      expect(zoo.animal_count).to eq(2)
+      expect(zoo.inventory).to eq([animal_1, animal_2, animal_3, animal_4])
+      expect(zoo.animal_count).to eq(4)
     end
+
+    it 'can separate animals by age' do
+      zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY")
+      animal_1 = Animal.new("Sea Otter", 10, 25)
+      animal_2 = Animal.new("Red Panda", 5, 70)
+      animal_3 = Animal.new("Capybara", 100, 200)
+      animal_4 = Animal.new("Dolphin", 150, 200)
+
+      expect(zoo.animals_older_than(250)).to eq([])
+      expect(zoo.animals_older_than(100)).to eq([animal_3, animal_4])
+      expect(zoo.animals_older_than(10)).to eq([animal_1])
+    end
+
+    it 'can add total weight of animals' do
+      zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY")
+      animal_1 = Animal.new("Sea Otter", 10, 25)
+      animal_2 = Animal.new("Red Panda", 5, 70)
+      animal_3 = Animal.new("Capybara", 100, 200)
+      animal_4 = Animal.new("Dolphin", 150, 200)
+
+      expect(zoo.total_weight_of_animals).to eq(265)
+    end
+
+    it 'can give all zoo details' do
+      zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY")
+      animal_1 = Animal.new("Sea Otter", 10, 25)
+      animal_2 = Animal.new("Red Panda", 5, 70)
+      animal_3 = Animal.new("Capybara", 100, 200)
+      animal_4 = Animal.new("Dolphin", 150, 200)
+
+      expect(zoo.details).to eq({"total_weight" => 265, "street address" => "2300 Southern Blvd"})
+    end                         
   end
 end
