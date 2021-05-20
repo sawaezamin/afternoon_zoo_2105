@@ -1,8 +1,8 @@
 require './lib/animal'
-require '.lib/zoo'
+require './lib/zoo'
 
 RSpec.describe Zoo do
-  descrive '#initialize' do
+  describe '#initialize' do
     it 'is an instance of zoo' do
       zoo = Zoo.new("Bronx Zoo", "2300 Southern Blvd", "Bronx", "NY")
       animal_1 = Animal.new("Sea Otter", 10, 25)
@@ -83,6 +83,6 @@ RSpec.describe Zoo do
       animal_4 = Animal.new("Dolphin", 150, 200)
 
       expect(zoo.details).to eq({"total_weight" => 265, "street address" => "2300 Southern Blvd"})
-    end                         
+    end
   end
 end
