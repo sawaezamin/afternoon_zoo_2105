@@ -1,6 +1,6 @@
-class Zoo
+ class Zoo
   attr_reader  :name, :street, :city, :state, :zip_code, :address
-  def initialize(animals)
+  def initialize(animals = [])
     @animals = []
   end
 
