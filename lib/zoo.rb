@@ -1,53 +1,48 @@
 class Zoo
-  attr_reader :street,
+  attr_reader :name,
+              :street,
               :city,
               :state,
               :zip_code,
-              :inventory
+              :inventory,
+              :animal_count
+
   def initialize(name, street, city, state, zip_code)
-    @name = name
-    @street = street
-    @city = city
-    @state = state
+    @name     = name
+    @street   = street
+    @city     = city
+    @state    = state
     @zip_code = zip_code
     @inventory = []
+    @animal_count = 0
   end
-
 
   def address
-    "#{street} #{city}, #{state} #{zip_code}"
+    "#{@street} #{@city}, #{@state} #{@zip_code}"
   end
-
-
-  def animal_count
-    @inventory.length
-  end
-
 
   def add_animal(animal)
     @inventory.push(animal)
+    @animal_count += 1
   end
-
 
   def animals_older_than(age)
-    older_age = []
+    older_animals = []
     @inventory.each do |animal|
       if animal.age_in_days / 7 >= age
-        older_age << animal
+        older_animals.push(animal)
       end
     end
-    older_age
+    older_animals
   end
-
 
   def total_weight_of_animals
     total_weight = 0
     @inventory.each do |animal|
-      total_weight += animal.weight.split(" ").first.to_i
+      total_weight += animal.weight.to_i
     end
     total_weight
   end
-
 
   def details
     {
@@ -56,24 +51,22 @@ class Zoo
     }
   end
 
-
   def animals_sorted_by_weight
     @inventory.sort_by do |animal|
-      animal.weight.split.first.to_i
+      animal.weight.to_i
     end.reverse
   end
 
-
   def animal_hash
-    new_hash = Hash.new
+    grouped_animal = Hash.new
     @inventory.each do |animal|
       first_letter = animal.kind[0]
-      if new_hash[first_letter]
-        new_hash[first_letter] << animal
+      if grouped_animal[first_letter]
+        grouped_animal[first_letter] << animal
       else
-        new_hash[first_letter] = [animal]
+        grouped_animal[first_letter] = [animal]
       end
     end
-    new_hash
+    grouped_animal
   end
 end

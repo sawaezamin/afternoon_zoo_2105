@@ -7,31 +7,27 @@ RSpec.describe Animal do
     expect(animal).to be_a(Animal)
   end
 
-  it 'has a kind' do
-    animal = Animal.new("Sea Otter", 10, 25)
+  it 'has attributes' do
+    animal_1 = Animal.new("Sea Otter", 10, 25)
 
-    expect(animal.kind).to eq("Sea Otter")
+    expect(animal_1.kind).to eq("Sea Otter")
+    expect(animal_1.weight).to eq("10 pounds")
+    expect(animal_1.age).to eq("25 weeks")
   end
 
-  it 'has a weight in pounds' do
-    animal = Animal.new("Sea Otter", 10, 25)
+  it 'has age in days' do
+    animal_1 = Animal.new("Sea Otter", 10, 25)
 
-    expect(animal.weight).to eq("10 pounds")
+    expect(animal_1.age_in_days).to eq(175)
   end
 
-  it 'has an age in weeks' do
-    animal = Animal.new("Sea Otter", 10, 25)
+  it 'can feed and add weight to animals' do
+    animal_1 = Animal.new("Sea Otter", 10, 25)
 
-    expect(animal.age).to eq("25 weeks")
-    expect(animal.age_in_days).to eq(175)
-  end
+    animal_1.feed!(2)
+    expect(animal_1.weight).to eq("12 pounds")
 
-  it 'can gain weight by eating' do
-    animal = Animal.new("Sea Otter", 10, 25)
-
-    animal.feed!(2)
-    expect(animal.weight).to eq("12 pounds")
-    animal.feed!(1)
-    expect(animal.weight).to eq("13 pounds")
+    animal_1.feed!(1)
+    expect(animal_1.weight).to eq("13 pounds")
   end
 end
